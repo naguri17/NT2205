@@ -1,0 +1,44 @@
+rc4
+python rc4_teaching.py encrypt ^
+  --key secret ^
+  --pt  "Hello world" ^
+  --verbose 2 --ksa-steps 10 --prga-bytes 10 --drop-n 0 --pause
+
+python rc4_teaching.py encrypt ^
+  --key 736563726574 ^
+  --pt  48656c6c6f20776f726c64 ^
+  --hex --verbose 2 --ksa-steps 10 --prga-bytes 10 --drop-n 0
+
+python rc4_teaching.py decrypt ^
+  --key secret ^
+  --ct  <paste ciphertext hex> ^
+  --hex --verbose 1
+
+
+chacha20_poly1305
+1. chacha20_poly1305_teaching_rev.py
+python chacha20_poly1305_teaching_rev.py encrypt ^
+  --key 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+  --nonce 000000000102030405060708 ^
+  --aad f33388860000000000004e91 ^
+  --pt 48656c6c6f2c20776f726c6421 ^
+  --hex --verbose 4 --show-mac-input --pause
+2. xchacha20_poly1305_teaching_rev.py
+python xchacha20_poly1305_teaching_rev.py encrypt ^
+  --key   808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f ^
+  --nonce 404142434445464748494a4b4c4d4e4f5051525354555657 ^
+  --aad   50515253c0c1c2c3c4c5c6c7 ^
+  --pt    4c616469657320616e642047656e746c656d656e206f662074686520636c6173 ^
+  --hex --verbose 2 --show-mac-input --pause
+
+3. xchacha20_poly1305_teaching_rev1.py (both)
+python xchacha20_poly1305_teaching_rev1.py selftest --mode ietf --verbose 2 --pause
+
+python xchacha20_poly1305_teaching_rev1.py encrypt ^
+  --mode xchacha ^
+  --key   808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f ^
+  --nonce 404142434445464748494a4b4c4d4e4f5051525354555657 ^
+  --aad   50515253c0c1c2c3c4c5c6c7 ^
+  --pt    4c616469657320616e642047656e746c656d656e206f662074686520636c6173 ^
+  --hex --verbose 2 --show-mac-input --pause
+

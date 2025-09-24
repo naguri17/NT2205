@@ -49,6 +49,12 @@ def caesar(text: str, shift: int = 3, decrypt: bool = False) -> str:
         for ch in text.upper()
     )
 
+def brute_force_caesar_decrypt_all_shifts(ciphertext: str):
+    print("Brute force Caesar decrypt (shifts 1-26):")
+    for shift in range(1, 27):
+        decrypted = caesar(ciphertext, shift=shift, decrypt=True)
+        print(f"Shift {shift:2}: {decrypted}")
+
 # --- 3. Atbash Cipher ---
 def atbash(text):
     return ''.join(ALPHABET[M - 1 - ALPHABET.index(ch)] if ch in ALPHABET else ch for ch in text.upper())
@@ -240,6 +246,9 @@ def main():
     
     parser.add_argument("--pigpenkey", type=str, help="26-character custom Pigpen key (symbols or chars)")
 
+    parser.add_argument("--brute_caesar", action="store_true", help="Brute force caesar decrypt all shifts")
+
+
     args = parser.parse_args()
 
     if args.cipher == "substitution":
@@ -252,7 +261,10 @@ def main():
             print(substitution_encrypt(args.text, key))
 
     elif args.cipher == "caesar":
-        print(caesar(args.text, shift=args.shift, decrypt=args.decrypt))
+        if args.brute_caesar and args.decrypt:
+            brute_force_caesar_decrypt_all_shifts(args.text)
+        else:
+            print(caesar(args.text, shift=args.shift, decrypt=args.decrypt))
 
     elif args.cipher == "atbash":
         print(atbash(args.text))

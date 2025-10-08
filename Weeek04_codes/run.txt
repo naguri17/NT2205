@@ -1,0 +1,65 @@
+﻿https://www.hexhero.com/converters/utf8-to-hex
+1. UTF8
+
+# Key & nonce are UTF-8 (must be exactly 32 & 12 bytes)
+python chacha20_poly1305_teaching_rev3.py encrypt \
+  --key "32-byte-utf8-key-string........" \
+  --nonce "12-byte-iv!" \
+  --aad "ghi nhớ AAD bằng UTF-8" \
+  --pt "Nội dung cần mã hóa" \
+  --out-ct ct.bin --out-tag tag.bin
+
+
+Note: Key & nonce are UTF-8 (must be exactly 32 & 12 bytes)
+chacha20_poly1305_teaching_rev2.py
+# UTF8
+python chacha20_poly1305_teaching_rev3.py encrypt ^
+  --key  abcdqwernkhgmloiabcdqwernkhgml12^
+  --nonce  Bgasbhjtdeqw^
+  --aad "ghi nhớ AAD bằng UTF-8" ^
+  --pt "Putin đại để tới" ^
+  --out-ct ct.bin --out-tag tag.bin
+# Hex
+python chacha20_poly1305_teaching_rev3.py encrypt ^
+  --hex ^
+  --key  1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+  --nonce 000000000102030405060708 ^
+  --aad f33388860000000000004e91 ^
+  --pt  48656c6c6f2c20776f726c6421 ^
+  --out-ct ct.bin --out-tag tag.bin
+
+# Binary
+# Read raw bytes from files for key/nonce/AAD/PT
+python chacha20_poly1305_teaching_rev3.py encrypt \
+  --key-file  key.bin \
+  --nonce-file nonce.bin \
+  --aad-file aad.bin \
+  --pt-file  cat.png \
+  --out-ct   secret.ct --out-tag secret.tag
+or
+python chacha20_poly1305_teaching_rev3.py encrypt ^
+  --hex ^
+  --key 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+  --nonce  000000000102030405060708 ^
+  --aad f33388860000000000004e91 ^
+  --pt-file cat.png ^
+  --out-ct ct.bin --out-tag tag.bin
+
+
+2. Decrypt
+# Binary tag from file
+python chacha20_poly1305_teaching_rev3.py decrypt \
+  --key-file key.bin --nonce-file nonce.bin --aad-file aad.bin \
+  --ct-file  ct.bin \
+  --tag-file tag.bin \
+  --out-pt recovered.bin
+
+# Hex tag as string
+python chacha20_poly1305_teaching_rev3.py decrypt ^
+  --hex ^
+  --key  61626364717765726E6B68676D6C6F6961626364717765726E6B68676D6C3132 ^
+  --nonce 4267617362686A7464657177 ^
+  --aad 676869206E68E1BB9B204141442062E1BAB16E67205554462D38 ^
+  --ct-file ct.bin ^
+  --tag 8c7337573103af3dff3fe69e68eb0db6 ^
+  --out-pt recovered.bin

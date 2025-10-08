@@ -1,0 +1,30 @@
+﻿pip install PyCryptodome
+pip install pyOpenSSL
+pip install liboqs-python
+pip install PyCryptodome pyOpenSSL liboqs-python
+
+Example for portable python:
+D:\Pythons\python3131-crypto\python.exe -m pip install PyCryptodome
+D:\Pythons\python3131-crypto\python.exe -m pip install pyOpenSSL
+D:\Pythons\python3131-crypto\python.exe -m pip install liboqs-python
+
+1. PyCryptodome (self-contained Python library)
+- No external C library is required.
+
+2. OpenSSL
+external C library: OpenSSL(libssl + libcrypto)
+Your Python code
+     │
+PyOpenSSL (Python wrapper)
+     │
+OpenSSL C library (libssl + libcrypto)
+
+
+3. liboqs-python(Post-quantum Cryptography)
+external C library: liboqs
+Your Python code
+   │
+liboqs-python (Python wrapper)
+   │
+liboqs (C/C++ library)
+

@@ -1,0 +1,3 @@
+D:\Pythons\python3131-crypto\python.exe chacha20_cli.py encrypt "48656c6c6f20507974686f6e" --encoding hex
+
+python chacha20_cli.py encrypt "Hello World!" --encoding utf8

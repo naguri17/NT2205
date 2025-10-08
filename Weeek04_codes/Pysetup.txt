@@ -1,0 +1,37 @@
+Set up
+D:\Pythons\python3131-crypto\python.exe -m pip install PyCryptodome
+D:\Pythons\python3131-crypto\python.exe -m pip install pyOpenSSL
+
+Chacha20
+
+Key: 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0
+None: 000000000102030405060708
+AAD: f33388860000000000004e91
+
+D:\Pythons\python3131-crypto\python.exe chacha20_cli.py encrypt ^
+--key 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+--nonce 000000000102030405060708 ^
+--aad f33388860000000000004e91 ^
+--aad-enc hex ^
+--pt-file cat.png ^
+--out-ct cuphercat.png --out-tag secret.tag --print-hex
+
+
+D:\Pythons\python3131-crypto\python.exe chacha20_cli.py encrypt ^
+--key 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+--nonce 000000000102030405060708 ^
+--aad f33388860000000000004e91f33388860000000000004e91 ^
+--aad-enc hex ^
+--pt-file cat.png ^
+--out-blob ciphercat.blob ^
+--out-ct ciphercat.png --out-tag secret.tag --print-hex
+
+
+D:\Pythons\python3131-crypto\python.exe chacha20_cli.py encrypt ^
+--key 1c9240a5eb55d38af333888604f6b5f0473917c1402b80099dca5cbc207075c0 ^
+--nonce 000000000102030405060708 ^
+--aad f33388860000000000004e91f33388860000000000004e91 ^
+--aad-enc hex ^
+--pt-file out.png ^
+--out-blob cipher.blob ^
+--out-ct cipher.png --out-tag secret.tag --print-hex
